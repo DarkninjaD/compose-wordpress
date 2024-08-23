@@ -14,3 +14,12 @@ services:
     build:
       context: ./src
       dockerfile: dockerfile
+    depends_on:
+      - database
+
+  database:
+    container_name: wordpress-database
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=my-secret-pw
+      - MYSQL_DATABASE=wordpressDB
