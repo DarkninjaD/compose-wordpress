@@ -6,9 +6,17 @@ services:
       - ./src:/usr/src
     ports:
       - "8080:80"
+    tty: true
+    depends_on:
+      - wordpress
 
   wordpress:
     container_name: wordpress
+    environment:
+      - DB_HOST=database
+      - DB_USER=user
+      - PASSWORD=examplepass
+      - DB_NAME=wordpress-database
     volumes:
       - ./src:/usr/src
     build:
@@ -23,3 +31,12 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=my-secret-pw
       - MYSQL_DATABASE=wordpressDB
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=examplepass
+    volumes:
+      - database:/var/lib/mysql
+    ports:
+      - 8001:5432
+
+volumes:
+  database:
