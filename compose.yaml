@@ -6,13 +6,11 @@ services:
       - ./src:/usr/src
     ports:
       - "8080:80"
-    tty: true
 
   wordpress:
     container_name: wordpress
+    volumes:
+      - ./src:/usr/src
     build:
       context: ./src
       dockerfile: dockerfile
-    volumes:
-      - ./src:/usr/src
-    tty: true
