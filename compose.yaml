@@ -1,0 +1,18 @@
+services:
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./conf.d:/etc/nginx/conf.d
+      - ./src:/usr/src
+    ports:
+      - "8080:80"
+    tty: true
+
+  wordpress:
+    container_name: wordpress
+    build:
+      context: ./src
+      dockerfile: dockerfile
+    volumes:
+      - ./src:/usr/src
+    tty: true
